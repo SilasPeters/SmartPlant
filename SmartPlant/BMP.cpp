@@ -1,3 +1,8 @@
+#ifndef BMP_h
+#define BMP_h
+
+#include "BMP.h"
+
 #include <Adafruit_BMP280.h>
 
 #define BMP_SCK  (13)
@@ -5,12 +10,11 @@
 #define BMP_MOSI (11)
 #define BMP_CS   (10)
 
-Adafruit_BMP280 bmp; // I2C
 
 // Example from:
 // https://github.com/adafruit/Adafruit_BMP280_Library/blob/master/examples/bmp280test/bmp280test.ino
 
-void bmpSetup() {
+void BMP::setup() {
   Serial.println(F("BMP280 test"));
   unsigned status = bmp.begin(BMP280_ADDRESS_ALT, BMP280_CHIPID);
 
@@ -33,14 +37,16 @@ void bmpSetup() {
                   Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
 }
 
-float readTemperature() {
+float BMP::temperature() {
   return bmp.readTemperature();
 }
 
-float readPressure() {
+float BMP::pressure() {
   return bmp.readPressure();
 }
 
-float readAltitude() {
+float BMP::altitude() {
   return bmp.readAltitude(1013.25); // Adjusted to local forecast
 }
+
+#endif
