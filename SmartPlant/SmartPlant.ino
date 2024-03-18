@@ -11,6 +11,7 @@ void setup()
   Wire.begin(PIN_WIRE_DATA_LINE, PING_WIRE_CLOCK_LINE);
   Serial.begin(9600);
   while ( !Serial ) delay(100);   // wait for native usb
+  oledSetup();
   bmpSetup();
   amuxSetup(5000, 160);
 }
@@ -31,7 +32,9 @@ void loop() {
   Serial.println(" m");
 
   Serial.println();
-
+  
+  oledLoop();
+  /*
   amuxLoop();
   Serial.print(F("Last read LDR value = "));
   Serial.println(getLastLdrReading());
@@ -43,6 +46,6 @@ void loop() {
   Serial.println();
 
   ledStatus = !ledStatus;
-  digitalWrite(LED_BUILTIN, ledStatus ? HIGH : LOW);
+  digitalWrite(LED_BUILTIN, ledStatus ? HIGH : LOW); */
   delay(1000);
 }

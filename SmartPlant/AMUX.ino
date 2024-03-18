@@ -27,6 +27,7 @@ int getLastMoistReading() { return lastMoistReading; }
 int getLastLdrReading() { return lastLdrReading; }
 
 void amuxLoop() {
+  return;
   unsigned long timeSinceLastMoistReading = millis() - lastMoistReadingTime;
 
   // Check if it is time to read the soil's moist
