@@ -6,6 +6,7 @@
 #include "OLED.h"
 #include "BMP.h"
 #include "AMUX.h"
+#include "Wifi.h"
 
 //PIN CONFIG --------------------------------------------
 const int PIN_WIRE_DATA_LINE = D1;  // IC2 Data line
@@ -19,6 +20,7 @@ MainServo servo;
 OLED oled;
 BMP bmp;
 AMUX amux;
+Wifi wifi;
 
 void setup()
 {
@@ -31,6 +33,7 @@ void setup()
   bmp.setup(); // MUST BE AFTER OLED
   amux.setup(PIN_AMUX_SEL, PIN_AMUX_ANALOG_READ, 5000, 160);
   servo.setup(PIN_SERVO);
+  wifi.setup("All hail the Froge", "Aap noot mies"); // Note, that the password must be at least 8 chars long
 }
 
 bool ledStatus = false;
