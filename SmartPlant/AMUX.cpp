@@ -1,15 +1,12 @@
-const int PIN_AMUX_SEL = D5;
-const int PIN_AMUX_ANALOG_READ = A0;
+#ifndef AMUX_h
+#define AMUX_h
 
-bool readingMoist = false;
-unsigned long lastMoistReadingTime = 0;
-unsigned long moistReadingInterval;
-unsigned long moistReadingDuration;
+#include "AMUX.h"
 
-word lastMoistReading;
-word lastLdrReading;
+void AMUX::setup(int pin_sel, int pin_read, unsigned long moistReadingIntervalParam, unsigned long moistReadingDurationParam) {
+  PIN_AMUX_SEL = pin_sel;
+  PIN_AMUX_ANALOG_READ = pin_read;
 
-void amuxSetup(unsigned long moistReadingIntervalParam, unsigned long moistReadingDurationParam) {
   moistReadingInterval = moistReadingIntervalParam;
   moistReadingDuration = moistReadingDurationParam;
 
@@ -17,54 +14,56 @@ void amuxSetup(unsigned long moistReadingIntervalParam, unsigned long moistReadi
   pinMode(PIN_AMUX_ANALOG_READ, INPUT);
 
   // Ensure that both values have been read before logic of other modules start
-  _readLdr();
-  _startReadingMoist();
+  readLdr();
+  startReadingMoist();
   delay(moistReadingDuration); // TODO blocking
-  _stopReadingMoist();
+  stopReadingMoist();
 }
 
-int getLastMoistReading() { return lastMoistReading; }
-int getLastLdrReading() { return lastLdrReading; }
+int AMUX::getLastMoistReading() { return lastMoistReading; }
+int AMUX::getLastLdrReading() { return lastLdrReading; }
 
-void amuxLoop() {
+void AMUX::loop() {
   return;
   unsigned long timeSinceLastMoistReading = millis() - lastMoistReadingTime;
 
   // Check if it is time to read the soil's moist
   if (timeSinceLastMoistReading >= moistReadingInterval) {
-    _startReadingMoist();
+    startReadingMoist();
   }
 
   switch(readingMoist) { // Either measure the soil or the light, not both
     case true:
       // Stop reading the moist once enough time has passed
       if (timeSinceLastMoistReading >= moistReadingDuration) {
-        _stopReadingMoist();
+        stopReadingMoist();
       }
       break;
 
     case false:
       // Update LDR reading
-      _readLdr();
+      readLdr();
       break;
   }
 }
 
-void _startReadingMoist() {
+void AMUX::startReadingMoist() {
   lastMoistReadingTime = millis();
   pinMode(PIN_AMUX_SEL, HIGH);
   readingMoist = true;
 }
 
-void _stopReadingMoist() {
+void AMUX::stopReadingMoist() {
   lastMoistReading = analogRead(PIN_AMUX_ANALOG_READ);
   pinMode(PIN_AMUX_SEL, LOW);
   readingMoist = false;
 }
 
-void _readLdr() {
+void AMUX::readLdr() {
   lastLdrReading = analogRead(PIN_AMUX_ANALOG_READ);
 }
+
+#endif
 
 /* OLD MANUAL MODE
 void startReadingMoist() {

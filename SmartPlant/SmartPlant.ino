@@ -5,14 +5,20 @@
 #include "MainServo.h"
 #include "OLED.h"
 #include "BMP.h"
+#include "AMUX.h"
 
+//PIN CONFIG --------------------------------------------
 const int PIN_WIRE_DATA_LINE = D1;  // IC2 Data line
 const int PIN_WIRE_CLOCK_LINE = D2; // IC2 Clock line
 const int PIN_SERVO = D8;
+const int PIN_AMUX_SEL = D5;
+const int PIN_AMUX_ANALOG_READ = A0;
+//-------------------------------------------------------
 
 MainServo servo;
 OLED oled;
 BMP bmp;
+AMUX amux;
 
 void setup()
 {
@@ -23,7 +29,7 @@ void setup()
   oled.setup();
   oled.drawFroge();
   bmp.setup(); // MUST BE AFTER OLED
-  amuxSetup(5000, 160);
+  amux.setup(PIN_AMUX_SEL, PIN_AMUX_ANALOG_READ, 5000, 160);
   servo.setup(PIN_SERVO);
 }
 
@@ -45,12 +51,12 @@ void loop() {
 
   Serial.println();
   
-  amuxLoop();
+  amux.loop();
   Serial.print(F("Last read LDR value = "));
-  Serial.println(getLastLdrReading());
+  Serial.println(amux.getLastLdrReading());
 
   Serial.print(F("Last read moist value = "));
-  Serial.println(getLastMoistReading());
+  Serial.println(amux.getLastMoistReading());
 
   Serial.println();
   Serial.println();
