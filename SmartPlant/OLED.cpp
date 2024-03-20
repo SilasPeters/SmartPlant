@@ -3,9 +3,9 @@
 
 #include "OLED.h"
 
-#include <Wire.h>
-#include <Adafruit_GFX.h>
-#include <Adafruit_SSD1306.h>
+#include <Wire.h> // Included in arduino core
+#include <Adafruit_GFX.h> // https://github.com/adafruit/Adafruit-GFX-Library
+#include <Adafruit_SSD1306.h> // https://github.com/adafruit/Adafruit_SSD1306
 
 #define OLED_RESET -1
 #define WIRE Wire

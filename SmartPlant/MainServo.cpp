@@ -2,7 +2,7 @@
 #define mainservo_h
 
 #include "MainServo.h"
-#include <Servo.h>
+#include <Servo.h> // https://github.com/arduino-libraries/Servo
 
 
 void MainServo::setup(int pin)

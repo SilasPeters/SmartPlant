@@ -3,7 +3,7 @@
 
 #include "BMP.h"
 
-#include <Adafruit_BMP280.h>
+#include <Adafruit_BMP280.h> // https://github.com/adafruit/Adafruit_BMP280_Library
 
 #define BMP_SCK  (13)
 #define BMP_MISO (12)

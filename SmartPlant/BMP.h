@@ -1,4 +1,4 @@
-#include <Adafruit_BMP280.h>
+#include <Adafruit_BMP280.h> // https://github.com/adafruit/Adafruit_BMP280_Library
 
 class BMP
 {
