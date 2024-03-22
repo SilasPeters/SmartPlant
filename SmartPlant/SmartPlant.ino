@@ -2,11 +2,13 @@
 // https://arduino-esp8266.readthedocs.io/en/latest/libraries.html#i2c-wire-library
 // https://github.com/esp8266/Arduino/blob/master/libraries/Wire/Wire.h
 
+#include "env.h"
 #include "MainServo.h"
 #include "OLED.h"
 #include "BMP.h"
 #include "AMUX.h"
 #include "Wifi.h"
+#include "MQTT.h"
 
 //PIN CONFIG --------------------------------------------
 const int PIN_WIRE_DATA_LINE = D1;  // IC2 Data line
@@ -21,6 +23,8 @@ OLED oled;
 BMP bmp;
 AMUX amux;
 Wifi wifi;
+WiFiClient wifiClient;
+MQTT mqtt(wifiClient);
 
 void setup()
 {
@@ -33,12 +37,14 @@ void setup()
   bmp.setup(); // MUST BE AFTER OLED
   amux.setup(PIN_AMUX_SEL, PIN_AMUX_ANALOG_READ, 5000, 160);
   servo.setup(PIN_SERVO);
-  wifi.setup("All hail the Froge", "Aap noot mies"); // Note, that the password must be at least 8 chars long
+  // Autoconnect to known AP, or become AP with specified credentials
+  wifi.setup(AP_SSID, AP_PASSWORD); // Note, that the password must be at least 8 chars long
 }
 
 bool ledStatus = false;
 
 void loop() {
+  mqtt.loop();
 
   Serial.print(F("Temperature = "));
   Serial.print(bmp.temperature());
