@@ -108,6 +108,11 @@ void loop() {
   updateEvents();
 }
 
+void toggleAutomatic()
+{
+  automatic = !automatic;
+}
+
 void updateEvents()
 {
   unsigned long mil = millis();
