@@ -24,7 +24,6 @@ int AMUX::getLastMoistReading() { return lastMoistReading; }
 int AMUX::getLastLdrReading() { return lastLdrReading; }
 
 void AMUX::loop() {
-  return;
   unsigned long timeSinceLastMoistReading = millis() - lastMoistReadingTime;
 
   // Check if it is time to read the soil's moist

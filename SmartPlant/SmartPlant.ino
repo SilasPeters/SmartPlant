@@ -10,13 +10,30 @@
 #include "Wifi.h"
 #include "MQTT.h"
 
-//PIN CONFIG --------------------------------------------
+// PIN CONFIG --------------------------------------------
 const int PIN_WIRE_DATA_LINE = D1;  // IC2 Data line
 const int PIN_WIRE_CLOCK_LINE = D2; // IC2 Clock line
 const int PIN_SERVO = D8;
 const int PIN_AMUX_SEL = D5;
 const int PIN_AMUX_ANALOG_READ = A0;
-//-------------------------------------------------------
+// -------------------------------------------------------
+
+// EVENT READERS -----------------------------------------
+bool doWater = false;
+bool doDetermine = false;
+bool doPublish = false;
+// -------------------------------------------------------
+
+// EVENT INTERVALS ---------------------------------------
+const unsigned long determineInterval = 300000;
+unsigned long lastDetermine = 0;
+const unsigned long publishInterval = 10000;
+unsigned long lastPublish = 0;
+// -------------------------------------------------------
+
+// TRESHOLDS ---------------------------------------------
+int thMoist = 512;
+// -------------------------------------------------------
 
 MainServo servo;
 OLED oled;
@@ -44,6 +61,7 @@ void setup()
 bool ledStatus = false;
 
 void loop() {
+  /*
   mqtt.loop();
 
   Serial.print(F("Temperature = "));
@@ -72,6 +90,62 @@ void loop() {
 
   ledStatus = !ledStatus;
   digitalWrite(LED_BUILTIN, ledStatus ? HIGH : LOW);
-  
-  delay(1000);
+  */
+
+  mqtt.loop();
+  amux.loop();
+
+  readEvents();
+
+  updateEvents();
+}
+
+void updateEvents()
+{
+  if(millis() - lastDetermine >= determineInterval)
+  {
+    doDetermine = true;
+  }
+  if(millis() - lastPublish >= publishInterval)
+  {
+    doPublish = true;
+  }
+}
+
+void readEvents()
+{
+  if(doWater)
+  {
+    doWater = false;
+    waterPlant();
+  }
+  if(doDetermine)
+  {
+    doDetermine = false;
+    determineWater();
+  }
+  if(doPublish)
+  {
+    doPublish = false;
+    publishValues();
+  }
+}
+
+void waterPlant()
+{
+  //TODO: servo go brrr
+}
+
+void determineWater()
+{
+  if(amux.getLastMoistReading() < thMoist)
+  {
+    // Moist Cr1tikal!
+    doWater = true;
+  }
+}
+
+void publishValues()
+{
+  //TODO: mqtt go brr
 }
