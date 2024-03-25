@@ -26,12 +26,13 @@ void MQTT::loop() {
 	  announce();
 	}
 	client.loop();
+  delay(1000); // TODO this is here just to ensure the client does not get disconnected
 }
 
 void MQTT::announce(){
   client.subscribe(TOPIC_WATER);
   client.subscribe(TOPIC_SENSE);
-  client.publish(TOPIC_ONLINE, "true");
+  client.publish(TOPIC_ONLINE, "true", true);
   // TODO last will and testament here or somewhere else?
 }
 
@@ -76,7 +77,7 @@ void MQTT::reconnect() {  // TODO blocking
 
 // PUBLISH METHODS -------------------------------------------
 void MQTT::publishMoist(int moist) {
-  client.publish(TOPIC_MOIST, String(moist).c_str());
+  client.publish(TOPIC_MOIST, String(moist).c_str()); // TODO what must be persistent?
 }
 
 void MQTT::publishLight(int light) {
