@@ -4,7 +4,6 @@
 #include "MQTT.h"
 #include "topics.h"
 #include "env.h"
-#include "booleans.h"
 #include <PubSubClient.h> // https://github.com/knolleary/pubsubclient
                           // Some aspects of this code has been shamelessly copied from this repo
 
@@ -13,9 +12,15 @@
 PubSubClient client;
 String lastReceivedMessage;
 
-MQTT::MQTT(WiFiClient& wifiClient) : client(wifiClient) {
+void (*waterPlant)();
+void (*publishValues)();
+
+MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)()) : client(wifiClient) {
 	client.setServer(MQTT_SERVER, 1883);
 	client.setCallback(callback);
+
+	waterPlant = waterPlantRef;
+  publishValues = publishValuesRef;
 
 	lastReceivedMessage = "";
 }
@@ -49,10 +54,10 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
 	Serial.println(receivedPayload);
 
   if (String(topic) == TOPIC_WATER) {
-    doWater = true;
+		waterPlant();
   }
   if (String(topic) == TOPIC_SENSE) {
-    doPublish = true;
+    publishValues();
   }
 }
 

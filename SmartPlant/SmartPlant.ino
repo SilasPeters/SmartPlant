@@ -3,7 +3,6 @@
 // https://github.com/esp8266/Arduino/blob/master/libraries/Wire/Wire.h
 
 #include "env.h"
-#include "booleans.h"
 #include "MainServo.h"
 #include "OLED.h"
 #include "BMP.h"
@@ -50,7 +49,15 @@ BMP bmp;
 AMUX amux;
 Wifi wifi;
 WiFiClient wifiClient;
-MQTT mqtt(wifiClient);
+MQTT mqtt(wifiClient, &mqtt_waterPlant, &mqtt_publishValues);
+
+void mqtt_waterPlant() {
+  doWater = true;
+}
+
+void mqtt_publishValues() {
+  doPublish = true;
+}
 
 void setup()
 {
