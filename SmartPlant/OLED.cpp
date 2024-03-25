@@ -37,11 +37,6 @@ void OLED::setup() {
   OLED::display = Adafruit_SSD1306(128, 32, &WIRE);
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   display.begin(SSD1306_SWITCHCAPVCC, 0x3C); // Address 0x3C for 128x32
-  // Show image buffer on the display hardware.
-  // Since the buffer is intialized with an Adafruit splashscreen
-  // internally, this will display the splashscreen.
-  display.display();
-  delay(1000);
 
   // Clear the buffer.
   display.clearDisplay();
@@ -77,6 +72,49 @@ void OLED::drawText(int line, String text)
 {
   cursor(0, line);
   display.print(text);
+}
+
+void OLED::sensorScreen(float temp, int light, int moist, float pressure)
+{
+  clear();
+
+  //TEMP
+  drawText(0, "Temp:  " + String(temp) + "'C");
+
+  //LIGHT
+  float lightF = (float)light / 1024;
+  int lightOn = (int)(lightF * 10);
+  String lightPrint = "Light: ";
+  for(int l = 0; l < 10; l++)
+  {
+    if(l < lightOn) { lightPrint += "#"; }
+    else { lightPrint += "-"; }
+  }
+  drawText(8, lightPrint);
+
+  //MOIST
+  float moistF = (float)moist / 1024;
+  int moistOn = (int)(moistF * 10);
+  String moistPrint = "Soil:  ";
+  for(int m = 0; m < 10; m++)
+  {
+    if(m < moistOn) { moistPrint += "#"; }
+    else { moistPrint += "-"; }
+  }
+  drawText(16, moistPrint);
+
+  //Pressure:
+  drawText(24, "Press: " + String(pressure) + "Pa");
+
+  finish();
+}
+
+void OLED::lastWaterScreen(int minutesAgo)
+{
+  clear();
+  drawText(0, F("Last Water:"));
+  drawText(8, String(minutesAgo) + "m ago");
+  finish();
 }
 
 #endif

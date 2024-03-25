@@ -18,17 +18,25 @@ const int PIN_AMUX_SEL = D5;
 const int PIN_AMUX_ANALOG_READ = A0;
 // -------------------------------------------------------
 
+// STATES ------------------------------------------------
+bool automatic = true;
+// -------------------------------------------------------
+
 // EVENT READERS -----------------------------------------
 bool doWater = false;
 bool doDetermine = false;
 bool doPublish = false;
 // -------------------------------------------------------
 
+int OLEDScreen = 0;
+
 // EVENT INTERVALS ---------------------------------------
 const unsigned long determineInterval = 300000;
 unsigned long lastDetermine = 0;
 const unsigned long publishInterval = 10000;
 unsigned long lastPublish = 0;
+unsigned long lastWaterUpdate = 0;
+int lastWaterMinutesAgo = 0;
 // -------------------------------------------------------
 
 // TRESHOLDS ---------------------------------------------
@@ -102,13 +110,21 @@ void loop() {
 
 void updateEvents()
 {
-  if(millis() - lastDetermine >= determineInterval)
-  {
-    doDetermine = true;
-  }
-  if(millis() - lastPublish >= publishInterval)
+  unsigned long mil = millis();
+  if(mil - lastPublish >= publishInterval)
   {
     doPublish = true;
+    lastPublish = mil;
+  }
+  if(mil - lastDetermine >= determineInterval && automatic)
+  {
+    doDetermine = true;
+    lastDetermine = mil;
+  }
+  if(mil - lastWaterUpdate >= 60000)
+  {
+    lastWaterMinutesAgo ++;
+    lastWaterUpdate = mil;
   }
 }
 
@@ -117,6 +133,8 @@ void readEvents()
   if(doWater)
   {
     doWater = false;
+    lastWaterUpdate = millis();
+    lastWaterMinutesAgo = 0;
     waterPlant();
   }
   if(doDetermine)
@@ -148,4 +166,19 @@ void determineWater()
 void publishValues()
 {
   //TODO: mqtt go brr
+  OLEDScreen ++;
+  if(OLEDScreen == 3) { OLEDScreen = 0; }
+
+  switch(OLEDScreen)
+  {
+    case 0:
+      oled.sensorScreen(bmp.temperature(), amux.getLastLdrReading(), amux.getLastMoistReading(), bmp.pressure());
+      break;
+    case 1:
+      oled.lastWaterScreen(lastWaterMinutesAgo);
+      break;
+    case 2:
+      oled.drawFroge();
+      break;
+  }
 }
