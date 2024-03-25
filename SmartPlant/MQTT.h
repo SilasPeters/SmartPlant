@@ -7,10 +7,15 @@ class MQTT
 	public:
 		MQTT(WiFiClient& wifiClient);
 		void loop();
-	
+    void publishMoist(int moist);
+    void publishLight(int light);
+    void publishPressure(float pressure);
+    void publishTemperature(float temperature);
+    void publishManual(bool manual);
+    
 	private:
     PubSubClient client;
-		static void callback(char* topic, byte* payload, unsigned int length);
-		void reconnect();
+    static void callback(char* topic, byte* payload, unsigned int length);
+    void reconnect();
     void announce();
 };

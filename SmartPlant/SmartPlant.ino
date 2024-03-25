@@ -3,6 +3,7 @@
 // https://github.com/esp8266/Arduino/blob/master/libraries/Wire/Wire.h
 
 #include "env.h"
+#include "booleans.h"
 #include "MainServo.h"
 #include "OLED.h"
 #include "BMP.h"
@@ -69,37 +70,6 @@ void setup()
 bool ledStatus = false;
 
 void loop() {
-  /*
-  mqtt.loop();
-
-  Serial.print(F("Temperature = "));
-  Serial.print(bmp.temperature());
-  Serial.println(" *C");
-
-  Serial.print(F("Pressure = "));
-  Serial.print(bmp.pressure());
-  Serial.println(" Pa");
-
-  Serial.print(F("Approx altitude = "));
-  Serial.print(bmp.altitude()); // Adjusted to local forecast
-  Serial.println(" m");
-
-  Serial.println();
-  
-  amux.loop();
-  Serial.print(F("Last read LDR value = "));
-  Serial.println(amux.getLastLdrReading());
-
-  Serial.print(F("Last read moist value = "));
-  Serial.println(amux.getLastMoistReading());
-
-  Serial.println();
-  Serial.println();
-
-  ledStatus = !ledStatus;
-  digitalWrite(LED_BUILTIN, ledStatus ? HIGH : LOW);
-  */
-
   mqtt.loop();
   amux.loop();
 
@@ -170,7 +140,11 @@ void determineWater()
 
 void publishValues()
 {
-  //TODO: mqtt go brr
+  mqtt.publishMoist(amux.getLastMoistReading());
+  mqtt.publishLight(amux.getLastLdrReading());
+  mqtt.publishPressure(bmp.pressure());
+  mqtt.publishTemperature(bmp.temperature());
+
   OLEDScreen ++;
   if(OLEDScreen == 3) { OLEDScreen = 0; }
 
