@@ -66,7 +66,7 @@ void MQTT::reconnect() {  // TODO blocking
 	while (!client.connected()) {
 		Serial.print("Attempting MQTT connection...");
 		// Attempt to connect
-		if (client.connect("Cute little plant", USERNAME, PASSWORD)) {
+		if (client.connect("Cute little plant", USERNAME, PASSWORD, TOPIC_ONLINE, 1, true, "false")) {
 			Serial.println("connected");
 		} else {
 			Serial.print("failed, rc=");
