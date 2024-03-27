@@ -10,19 +10,18 @@
 #include <ESP8266WiFi.h> // Included in arduino ESP8266 core
 
 PubSubClient client;
-String lastReceivedMessage;
 
 void (*waterPlant)();
 void (*publishValues)();
+void (*calibrateMoist)(int);
 
-MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)()) : client(wifiClient) {
+MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), void (*calibrateMoistRef)(int)) : client(wifiClient) {
 	client.setServer(MQTT_SERVER, 1883);
 	client.setCallback(callback);
 
 	waterPlant = waterPlantRef;
   publishValues = publishValuesRef;
-
-	lastReceivedMessage = "";
+	calibrateMoist = calibrateMoistRef;
 }
 
 void MQTT::loop() {
@@ -37,6 +36,7 @@ void MQTT::loop() {
 void MQTT::announce(){
   client.subscribe(TOPIC_WATER);
   client.subscribe(TOPIC_SENSE);
+  client.subscribe(TOPIC_CALIBRATE_MOIST);
   client.publish(TOPIC_ONLINE, "true", true);
   // TODO last will and testament here or somewhere else?
 }
@@ -59,6 +59,9 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
   if (String(topic) == TOPIC_SENSE) {
     publishValues();
   }
+	if (String(topic) == TOPIC_CALIBRATE_MOIST) {
+		calibrateMoist(int(payload));
+	}
 }
 
 void MQTT::reconnect() {  // TODO blocking

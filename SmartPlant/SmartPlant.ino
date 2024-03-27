@@ -49,7 +49,7 @@ BMP bmp;
 AMUX amux;
 Wifi wifi;
 WiFiClient wifiClient;
-MQTT mqtt(wifiClient, &mqtt_waterPlant, &mqtt_publishValues);
+MQTT mqtt(wifiClient, &mqtt_waterPlant, &mqtt_publishValues, &mqtt_calibrateMoist);
 
 void mqtt_waterPlant() {
   doWater = true;
@@ -57,6 +57,10 @@ void mqtt_waterPlant() {
 
 void mqtt_publishValues() {
   doPublish = true;
+}
+
+void mqtt_calibrateMoist(int payload) {
+  thMoist = payload;
 }
 
 void setup()
