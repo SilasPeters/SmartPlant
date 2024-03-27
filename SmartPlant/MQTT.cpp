@@ -10,35 +10,51 @@
 #include <ESP8266WiFi.h> // Included in arduino ESP8266 core
 
 PubSubClient client;
-String lastReceivedMessage;
+
+unsigned long timeLastConnectionAttempt;
+unsigned int reconnectInterval;
 
 void (*waterPlant)();
 void (*publishValues)();
 
-MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)()) : client(wifiClient) {
+MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), unsigned int reconnectIntervalParam) : client(wifiClient) {
 	client.setServer(MQTT_SERVER, 1883);
 	client.setCallback(callback);
 
 	waterPlant = waterPlantRef;
   publishValues = publishValuesRef;
 
-	lastReceivedMessage = "";
+	timeLastConnectionAttempt = 0;
+	reconnectInterval = reconnectIntervalParam;
 }
 
 void MQTT::loop() {
-	if (!client.connected()) {
-		reconnect(); // Will also be called to lay initial connection
-	  announce();
-	}
+	if (!ensureConnection()) { return; }
 	client.loop();
   delay(1000); // TODO this is here just to ensure the client does not get disconnected
 }
 
-void MQTT::announce(){
-  client.subscribe(TOPIC_WATER);
-  client.subscribe(TOPIC_SENSE);
-  client.publish(TOPIC_ONLINE, "true", true);
-  // TODO last will and testament here or somewhere else?
+bool MQTT::ensureConnection() {
+	if (client.connected()) { return true; } // Connection is ensured
+
+	if (millis() - timeLastConnectionAttempt < reconnectInterval) { return false; } // Wait before reconnecting
+	timeLastConnectionAttempt = millis(); // Time to retry!
+	Serial.print("Attempting MQTT connection... ");
+
+  // Try to connect with credentials, and declare Last Will and Testament of "false" to TOPIC_ONLINE with QoS 1 and retainment.
+	if (client.connect("Cute little plant", USERNAME, PASSWORD, TOPIC_ONLINE, 1, true, "false")) {
+		// On success, resubscribe to everything and publish that device turned online again
+		client.subscribe(TOPIC_WATER);
+		client.subscribe(TOPIC_SENSE);
+		client.publish(TOPIC_ONLINE, "true", true); // retained
+		Serial.println("Connected!");
+		return true;
+	}
+
+  // Failed to connect
+  Serial.print("Connection failed, will retry soon. Error code: ");
+  Serial.println(client.state());
+	return false;
 }
 
 void MQTT::callback(char* topic, byte* payload, unsigned int length) {
@@ -60,24 +76,6 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
     publishValues();
   }
 }
-
-void MQTT::reconnect() {  // TODO blocking
-	// Loop until we're reconnected
-	while (!client.connected()) {
-		Serial.print("Attempting MQTT connection...");
-		// Attempt to connect
-		if (client.connect("Cute little plant", USERNAME, PASSWORD, TOPIC_ONLINE, 1, true, "false")) {
-			Serial.println("connected");
-		} else {
-			Serial.print("failed, rc=");
-			Serial.print(client.state());
-			Serial.println("will try again in 5 seconds");
-			// Wait 5 seconds before retrying
-			delay(5000);
-		}
-	}
-}
-
 
 
 // PUBLISH METHODS -------------------------------------------

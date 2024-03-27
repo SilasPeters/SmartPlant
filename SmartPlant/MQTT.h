@@ -5,7 +5,7 @@
 class MQTT
 {
 	public:
-		MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)());
+		MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), unsigned int reconnectInterval = 10000);
 		void loop();
     void publishMoist(int moist);
     void publishLight(int light);
@@ -16,6 +16,5 @@ class MQTT
 	private:
     PubSubClient client;
     static void callback(char* topic, byte* payload, unsigned int length);
-    void reconnect();
-    void announce();
+    bool ensureConnection();
 };
