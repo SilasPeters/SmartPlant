@@ -12,6 +12,7 @@ class MQTT
     void publishPressure(float pressure);
     void publishTemperature(float temperature);
     void publishManual(bool manual);
+    void publishTimeSinceLastWatering(int minutes);
     
 	private:
     PubSubClient client;

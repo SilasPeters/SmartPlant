@@ -122,6 +122,7 @@ void readEvents()
     lastWaterUpdate = millis();
     lastWaterMinutesAgo = 0;
     waterPlant();
+    mqtt.publishTimeSinceLastWatering(lastWaterMinutesAgo);
   }
   if(doDetermine)
   {
@@ -155,6 +156,7 @@ void publishValues()
   mqtt.publishLight(amux.getLastLdrReading());
   mqtt.publishPressure(bmp.pressure());
   mqtt.publishTemperature(bmp.temperature());
+  mqtt.publishTimeSinceLastWatering(lastWaterMinutesAgo);
 
   OLEDScreen ++;
   if(OLEDScreen == 3) { OLEDScreen = 0; }

@@ -100,6 +100,10 @@ void MQTT::publishTemperature(float temperature) {
   client.publish(TOPIC_TEMPERATURE, String(temperature).c_str());
 }
 
+void MQTT::publishTimeSinceLastWatering(int minutes) {
+  client.publish(TOPIC_TIME_SINCE_LAST_WATERING, String(minutes).c_str());
+}
+
 
 void MQTT::publishManual(bool manual) {
   client.publish(TOPIC_MANUAL, manual ? "true" : "false");
