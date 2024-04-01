@@ -37,10 +37,11 @@ that the elicited gestures are unbiased.
 
 #### Demographics of participants
 
-|-----|--------|--------------|-----------------------------|---------------------------|
-| Age | Gender | Right-handed | Commonly uses digital tools | Used gesture tools before |
-|-----|--------|--------------|-----------------------------|---------------------------|
-|     |        |              |                             |                           |
+|-----|-----|--------|--------------|-----------------------------|---------------------------|
+| No. | Age | Gender | Right-handed | Commonly uses digital tools | Used gesture tools before |
+|-----|-----|--------|--------------|-----------------------------|---------------------------|
+| 1   | 45  | Female | Yes          | Yes                         | No                        |
+| 2   | 49  | Male   | Yes          | Yes                         | No                        |
 
 ## Method
 
@@ -61,13 +62,67 @@ the participant chooses now, is called the final symbol.
 Lastly, the participant is asked to evaluate the final symbol on its complexity.
 
 The results of the interaction with a single participant, include the original
-symbol and the final symbol. The symbols should be described with an eye for detail.
+symbol and the final symbol. The symbols should be described with an eye for
+detail, to esure high reproducibility.
+
+### Proposed symbols
+
+These are the symbols which the researcher should have prepared in advance.
+
+**Watering the plant**:
+
+- Tilting a small watering can forwards
+  - Like you hold a stick diagonally, leaning forwards, but start pointing it in
+    front of you. The motion is smooth, and after holding it for a second or two
+    tops, you return to your original pose, smoothly.
+- Tilting a small watering can sideways
+  - Same as the previous symbol, but you rotate everything by 90 degrees
+    towards the other hand.
+- Tilting a large watering can
+  - Do the same as when you tilt the small watering can forwards, but act as if
+    the stick is really big and you need a second hand.
+- Sprinkling water droplets
+  - Just like how you would spread salt onto your enemy's corpse in a video game,
+    you slide your thumb along the other four fingers of the same hand, while
+    moving said four fingers a little. Or you could compare it to applying cheese
+    to your pizza.
+
+**Reading sensor data**:
+
+- Wave towards you
+  - Wave towards you, as if you ask someone to approach you
+- Native Amarican
+  - Look forwards while putting your hand above your eyes to protect them from
+    the sun
+- Head scratch
+  - Just get rid of that itch
+- Sliding over the table
+  - Move your hand downwards and slide it over an imaginary table. As if you are
+    gesturing it's all over, but more slowly.
 
 ## Results
 
 ### All symbols
 
-First, we will list all the symbols observed:
+First, we will list all the final symbols observed:
+
+**Watering the plant**:
+
+|-----|--------------------------------------------|
+| No. | Detailed description of final gesture      |
+|-----|--------------------------------------------|
+| 1   | Watering can sideways, but pssh if outside |
+| 2   | Psssh                                      |
+
+**Reading sensor data**:
+
+|-----|---------------------------------------|
+| No. | Detailed description of final gesture |
+|-----|---------------------------------------|
+| 1   | Wave, as in greeting                  |
+| 2   | Wave towards you                      |
+
+TODO LIST ALL FINAL SYMBOLS
 
 ### Dissimilarity matrix
 
@@ -80,22 +135,72 @@ a scale of 0 to 10. While this is no reproducible science, comparing things like
 number of joints involved creates results which do not properly represent the
 human understanding and associations of the gestures.
 
-TODO HIER DISSIMILARITY MATRIX
+TODO HIER DISSIMILARITY MATRIX AFMAKEN
+
+**Watering the plant**:
+
+|---|----|-------------------------------------|
+|   | 1  | 2                                   |
+|---|----|-------------------------------------|
+| 1 | 0  | 2                                   |
+|---|----|-------------------------------------|
+| 2 | 2  | 0                                   |
+|---|----|-------------------------------------|
+
+**Reading sensor data**:
+
+|---|----|-------------------------------------|
+|   | 1  | 2                                   |
+|---|----|-------------------------------------|
+| 1 | 0  | 4                                   |
+|---|----|-------------------------------------|
+| 2 | 4  | 0                                   |
+|---|----|-------------------------------------|
 
 ### Clustering by dissimilarity
 
 To express which symbols should be considered similar, we must compare all
-dissimilarities to a τ, where τ represents the maximal dissimilarity before we
+dissimilarities to a τ, where τ represents the maximum dissimilarity before we
 consider two symbols to be different. If the dissimilarity of two symbols is
 lower than τ, then we consider them similar. We can express this in a matrix as
-well.
+well. For this research, we consider τ to equal 4
 
 TODO HIER EEN MATRIX MET BOOLEANS VOOR SIMILAR OR NOT SIMILAR
+
+
+**Watering the plant**:
+
+|---|----|-------------------------------------|
+|   | 1  | 2                                   |
+|---|----|-------------------------------------|
+| 1 | T  | T                                   |
+|---|----|-------------------------------------|
+| 2 | T  | T                                   |
+|---|----|-------------------------------------|
+
+**Reading sensor data**:
+
+|---|----|-------------------------------------|
+|   | 1  | 2                                   |
+|---|----|-------------------------------------|
+| 1 | T  | F                                   |
+|---|----|-------------------------------------|
+| 2 | F  | T                                   |
+|---|----|-------------------------------------|
 
 This gives us the following clusters:
 
 TODO HIER ALLE SYMBOLS GROEPEREN, ZODAT JE ZE ESSENTIEEL COMBINEERT TOT EEN PAAR
 GESTURES DIE WE CONSDIREN
+
+**Watering the plant**:
+
+- 1: Psssh
+
+**Reading sensor data**:
+
+- 1: Wave, as in greeting
+- 2: Wave towards you
 
 We can treat each cluster as one gesture, so that we can compare these clusters
 to determine which cluster is considered to be most fitting for each referent.
