@@ -108,11 +108,20 @@ First, we will list all the final symbols observed:
 
 **Watering the plant**:
 
-|-----|--------------------------------------------|
-| No. | Detailed description of final gesture      |
-|-----|--------------------------------------------|
-| 1   | Watering can sideways, but pssh if outside |
-| 2   | Psssh                                      |
+|-----|----------------------------------------------|
+| No. | Detailed description of final gesture        |
+|-----|----------------------------------------------|
+| 1   | Watering-can sideways, but psssh* if outside |
+| 2   | Psssh*                                       |
+| 3   | Watering-can forwards                        |
+| 4   | Watering-can sideways                        |
+| 5   | Watering-can sideways                        |
+| 6   | Watering-can forwards                        |
+
+*psssh = put all fingertips together, with your palm facing forwards. Then,
+spread all fingers as if you were to enlarge something on your screen.
+Semantically speaking, you act as if your finger tops are water droplets which
+are sprayed forwards.
 
 **Reading sensor data**:
 
@@ -121,8 +130,10 @@ First, we will list all the final symbols observed:
 |-----|---------------------------------------|
 | 1   | Wave, as in greeting                  |
 | 2   | Wave towards you                      |
-
-TODO LIST ALL FINAL SYMBOLS
+| 3   | Wave towards you                      |
+| 4   | Tap on palm of hand                   |
+| 5   | Lift hand with imaginary phone        |
+| 6   | Wave upwards                          |
 
 ### Dissimilarity matrix
 
@@ -135,27 +146,41 @@ a scale of 0 to 10. While this is no reproducible science, comparing things like
 number of joints involved creates results which do not properly represent the
 human understanding and associations of the gestures.
 
-TODO HIER DISSIMILARITY MATRIX AFMAKEN
-
 **Watering the plant**:
 
-|---|----|-------------------------------------|
-|   | 1  | 2                                   |
-|---|----|-------------------------------------|
-| 1 | 0  | 2                                   |
-|---|----|-------------------------------------|
-| 2 | 2  | 0                                   |
-|---|----|-------------------------------------|
+|---|---|-------------------|
+|   | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|-------------------|
+| 1 | 0 | 2 | 6 | 3 | 3 | 5 |
+|---|---|-------------------|
+| 2 | 2 | 0 | 9 | 9 | 9 | 9 |
+|---|---|-------------------|
+| 3 | 2 | 0 | 0 | 2 | 2 | 0 |
+|---|---|-------------------|
+| 4 | 2 | 0 | 2 | 0 | 0 | 2 |
+|---|---|-------------------|
+| 5 | 2 | 0 | 2 | 0 | 0 | 2 |
+|---|---|-------------------|
+| 6 | 2 | 0 | 0 | 2 | 2 | 0 |
+|---|---|-------------------|
 
 **Reading sensor data**:
 
-|---|----|-------------------------------------|
-|   | 1  | 2                                   |
-|---|----|-------------------------------------|
-| 1 | 0  | 4                                   |
-|---|----|-------------------------------------|
-| 2 | 4  | 0                                   |
-|---|----|-------------------------------------|
+|---|---|-------------------|
+|   | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|-------------------|
+| 1 | 0 | 4 | 4 | 9 | 9 | 4 |
+|---|---|-------------------|
+| 2 | 4 | 0 | 0 | 8 | 3 | 3 |
+|---|---|-------------------|
+| 3 | 4 | 0 | 0 | 8 | 3 | 3 |
+|---|---|-------------------|
+| 4 | 9 | 8 | 8 | 0 | 7 | 7 |
+|---|---|-------------------|
+| 5 | 9 | 3 | 3 | 7 | 0 | 3 |
+|---|---|-------------------|
+| 6 | 4 | 3 | 3 | 7 | 3 | 0 |
+|---|---|-------------------|
 
 ### Clustering by dissimilarity
 
@@ -170,37 +195,52 @@ TODO HIER EEN MATRIX MET BOOLEANS VOOR SIMILAR OR NOT SIMILAR
 
 **Watering the plant**:
 
-|---|----|-------------------------------------|
-|   | 1  | 2                                   |
-|---|----|-------------------------------------|
-| 1 | T  | T                                   |
-|---|----|-------------------------------------|
-| 2 | T  | T                                   |
-|---|----|-------------------------------------|
+|---|---|-------------------|
+|   | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|-------------------|
+| 1 | T | T | F | T | T | F |
+|---|---|-------------------|
+| 2 | T | T | F | F | F | F |
+|---|---|-------------------|
+| 3 | T | T | T | T | T | T |
+|---|---|-------------------|
+| 4 | T | T | T | T | T | T |
+|---|---|-------------------|
+| 5 | T | T | T | T | T | T |
+|---|---|-------------------|
+| 6 | T | T | T | T | T | T |
+|---|---|-------------------|
 
 **Reading sensor data**:
 
-|---|----|-------------------------------------|
-|   | 1  | 2                                   |
-|---|----|-------------------------------------|
-| 1 | T  | F                                   |
-|---|----|-------------------------------------|
-| 2 | F  | T                                   |
-|---|----|-------------------------------------|
+|---|---|-------------------|
+|   | 1 | 2 | 3 | 4 | 5 | 6 |
+|---|---|-------------------|
+| 1 | T | F | F | F | F | F |
+|---|---|-------------------|
+| 2 | F | T | T | F | T | T |
+|---|---|-------------------|
+| 3 | F | T | T | F | T | T |
+|---|---|-------------------|
+| 4 | F | F | F | T | F | F |
+|---|---|-------------------|
+| 5 | F | T | T | F | T | T |
+|---|---|-------------------|
+| 6 | F | T | T | F | T | T |
+|---|---|-------------------|
 
 This gives us the following clusters:
 
-TODO HIER ALLE SYMBOLS GROEPEREN, ZODAT JE ZE ESSENTIEEL COMBINEERT TOT EEN PAAR
-GESTURES DIE WE CONSDIREN
-
 **Watering the plant**:
 
-- 1: Psssh
+- G1: Psssh
+- G2: Watering-can sideways
 
 **Reading sensor data**:
 
-- 1: Wave, as in greeting
-- 2: Wave towards you
+- G1: Wave, as in greeting
+- G2: Wave towards you
+- G3: Tap on palm of hand
 
 We can treat each cluster as one gesture, so that we can compare these clusters
 to determine which cluster is considered to be most fitting for each referent.
@@ -213,11 +253,16 @@ follows:
 
 $$\sum{P_i \in P}{(|P_i|/|P|)^2}$$
 
-Thus, this gives us the following measures of agreement for both referents:
+Thus, this gives us the following agreement scores for both referents:
 
-TODO GEEF HIER PER CLUSTER AAN WAT DE MEASURE OF AGREEMNT IS
+**Watering the plant**: (2/6)^2 + (4/6)^2 = 5/9
+**Reading sensor data**: (1/6)^2 + (4/6)^2 + (1/6)^2 = 1/2
 
 ## Conclusion
 
-TODO CHOOSE GESTURE WITH THE HIGHEST AGREEMENT SCORE.
+For **watering the plant**, we will go for the 'watering-can sideways' symbol,
+as this is the mode for the gestures data.
+
+For **reading sensor data**: the 'wave towards you' symbol has been suggested
+the most, and as such we will go for this gesture.
 
