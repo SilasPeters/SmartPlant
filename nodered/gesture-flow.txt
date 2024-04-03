@@ -1,0 +1,310 @@
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+LEVER DIT NIET DIRECT IN, ZIE INSTRUCTIES
+[
+    {
+        "id": "dd94c5f799bde02d",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "4e14f9eb03f3e5cc",
+        "type": "mqtt-broker",
+        "name": "UU",
+        "broker": "",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "6417b50588fd8d70",
+        "type": "serial-port",
+        "name": "Stickuino gestures",
+        "serialport": "/dev/ttyUSB0",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "a10bef1c7fbf6980",
+        "type": "serial in",
+        "z": "dd94c5f799bde02d",
+        "name": "Stickuino serial output",
+        "serial": "6417b50588fd8d70",
+        "x": 140,
+        "y": 400,
+        "wires": [
+            [
+                "d860ca37e5b0fcd6",
+                "bd2ab0cf23bdb41a"
+            ]
+        ]
+    },
+    {
+        "id": "d860ca37e5b0fcd6",
+        "type": "debug",
+        "z": "dd94c5f799bde02d",
+        "name": "Print serial input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "730436b6230695c2",
+        "type": "switch",
+        "z": "dd94c5f799bde02d",
+        "name": "Parse gesture",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "doWaterGesture",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "doSensorGesture",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 600,
+        "y": 400,
+        "wires": [
+            [
+                "156adef5bd39b39a",
+                "6439dbed5c74cf4a"
+            ],
+            [
+                "b3c57c840ac298db",
+                "37ad452bc4e2d8d8"
+            ]
+        ]
+    },
+    {
+        "id": "156adef5bd39b39a",
+        "type": "debug",
+        "z": "dd94c5f799bde02d",
+        "name": "Water",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Water gesture!\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 810,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "b3c57c840ac298db",
+        "type": "debug",
+        "z": "dd94c5f799bde02d",
+        "name": "Sensor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Sensor gesture!\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 820,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "7544d990db7d4cc8",
+        "type": "mqtt out",
+        "z": "dd94c5f799bde02d",
+        "name": "Read sensors",
+        "topic": "infob3it/student085/garden/do/sense",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e14f9eb03f3e5cc",
+        "x": 1040,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "68992292c1faa640",
+        "type": "mqtt out",
+        "z": "dd94c5f799bde02d",
+        "name": "Water plant",
+        "topic": "infob3it/student085/garden/do/water",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "4e14f9eb03f3e5cc",
+        "x": 1030,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "bd2ab0cf23bdb41a",
+        "type": "change",
+        "z": "dd94c5f799bde02d",
+        "name": "Trim newline",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$trim(msg.payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "730436b6230695c2"
+            ]
+        ]
+    },
+    {
+        "id": "6439dbed5c74cf4a",
+        "type": "change",
+        "z": "dd94c5f799bde02d",
+        "name": "Empty payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "do",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 360,
+        "wires": [
+            [
+                "68992292c1faa640"
+            ]
+        ]
+    },
+    {
+        "id": "37ad452bc4e2d8d8",
+        "type": "change",
+        "z": "dd94c5f799bde02d",
+        "name": "Empty payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "do",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 440,
+        "wires": [
+            [
+                "7544d990db7d4cc8"
+            ]
+        ]
+    }
+]
+
