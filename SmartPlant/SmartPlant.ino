@@ -18,6 +18,21 @@ const int PIN_AMUX_SEL = D5;
 const int PIN_AMUX_ANALOG_READ = A0;
 // -------------------------------------------------------
 
+// BUTTON VARS -------------------------------------------
+unsigned long lastPress;
+const unsigned long debounceTime = 50;
+// -------------------------------------------------------
+
+// WATER GIVING VARS -------------------------------------
+const int waterOpen = 25;
+const int waterClosed = 72;
+bool isWatering = false;
+unsigned long lastOpen;
+const unsigned long openDelay = 10000;
+int defaultSkipChecks = 2;
+int skipChecks = defaultSkipChecks;
+// -------------------------------------------------------
+
 // STATES ------------------------------------------------
 bool automatic = true;
 // -------------------------------------------------------
@@ -65,6 +80,9 @@ void mqtt_calibrateMoist(int payload) {
 
 void setup()
 {
+  //setup flash button
+  pinMode(0, INPUT_PULLUP);
+
   pinMode(LED_BUILTIN, OUTPUT);
   Wire.begin(PIN_WIRE_DATA_LINE, PIN_WIRE_CLOCK_LINE);
   Serial.begin(9600);
@@ -81,6 +99,8 @@ void setup()
 bool ledStatus = false;
 
 void loop() {
+  readFlashButton();
+
   mqtt.loop();
   amux.loop();
 
@@ -89,13 +109,38 @@ void loop() {
   updateEvents();
 }
 
+void readFlashButton()
+{
+  if(millis() - lastPress >= debounceTime)
+  {
+    if(digitalRead(0) == LOW)
+    {
+      toggleAutomatic();
+      Serial.println("Toggled automatic");
+    }
+  }
+}
+
 void toggleAutomatic()
 {
   automatic = !automatic;
+  mqtt.publishManual(!automatic);
+  if(automatic)
+  {
+    digitalWrite(LED_BUILTIN, LOW);
+    Serial.println("led ON");
+  }
+  else 
+  {
+    digitalWrite(LED_BUILTIN, HIGH);
+    Serial.println("led OFF");
+  }  
 }
 
 void updateEvents()
 {
+  checkIfCloseWater();
+
   unsigned long mil = millis();
   if(mil - lastPublish >= publishInterval)
   {
@@ -127,7 +172,14 @@ void readEvents()
   if(doDetermine)
   {
     doDetermine = false;
-    determineWater();
+    if(skipChecks == 0)
+    {
+      determineWater();
+    }
+    else
+    {
+      skipChecks --;
+    }
   }
   if(doPublish)
   {
@@ -136,9 +188,21 @@ void readEvents()
   }
 }
 
+void checkIfCloseWater()
+{
+  if(millis() - lastOpen > openDelay)
+  {
+    isWatering = false;
+    servo.write(waterClosed);
+  }
+}
+
 void waterPlant()
 {
-  //TODO: servo go brrr
+  isWatering = true;
+  lastOpen = millis();
+  servo.write(waterOpen);
+  skipChecks = defaultSkipChecks;
 }
 
 void determineWater()

@@ -36,9 +36,9 @@ void MQTT::loop() {
 void MQTT::announce(){
   client.subscribe(TOPIC_WATER);
   client.subscribe(TOPIC_SENSE);
-  client.subscribe(TOPIC_CALIBRATE_MOIST);
+  client.subscribe(TOPIC_CALIBRATE_MOIST);  
   client.publish(TOPIC_ONLINE, "true", true);
-  // TODO last will and testament here or somewhere else?
+  publishManual(false);
 }
 
 void MQTT::callback(char* topic, byte* payload, unsigned int length) {
@@ -106,7 +106,7 @@ void MQTT::publishTimeSinceLastWatering(int minutes) {
 
 
 void MQTT::publishManual(bool manual) {
-  client.publish(TOPIC_MANUAL, manual ? "true" : "false");
+  client.publish(TOPIC_MANUAL, manual ? "true" : "false", true);
 }
 // -----------------------------------------------------------
 
