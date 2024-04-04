@@ -86,7 +86,7 @@ void setup()
   pinMode(LED_BUILTIN, OUTPUT);
   Wire.begin(PIN_WIRE_DATA_LINE, PIN_WIRE_CLOCK_LINE);
   Serial.begin(9600);
-  while ( !Serial ) delay(100);   // wait for native usb
+  // while ( !Serial ) delay(100);   // wait for native usb
   oled.setup();
   oled.drawFroge();
   bmp.setup(); // MUST BE AFTER OLED
