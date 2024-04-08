@@ -48,13 +48,13 @@ void AMUX::loop() {
 
 void AMUX::startReadingMoist() {
   lastMoistReadingTime = millis();
-  pinMode(PIN_AMUX_SEL, HIGH);
+  digitalWrite(PIN_AMUX_SEL, LOW); // LOW or HIGH is inverted on NodeMCU
   readingMoist = true;
 }
 
 void AMUX::stopReadingMoist() {
   lastMoistReading = analogRead(PIN_AMUX_ANALOG_READ);
-  pinMode(PIN_AMUX_SEL, LOW);
+  digitalWrite(PIN_AMUX_SEL, HIGH); // LOW or HIGH is inverted on NodeMCU
   readingMoist = false;
 }
 
@@ -63,28 +63,3 @@ void AMUX::readLdr() {
 }
 
 #endif
-
-/* OLD MANUAL MODE
-void startReadingMoist() {
-  readingMoist = true;
-  readingMoistTimeStart = millis();
-  pinMode(PIN_AMUX_SEL, HIGH);
-}
-
-// Will automatically be called
-// Is public to allow early stopping
-void stopReadingMoist() {
-  readingMoist = false;
-  moistResult = analogRead(PIN_AMUX_ANALOG_READ);
-  pinMode(PIN_AMUX_SEL, LOW);
-}
-
-// Only returns true when the measuring has stopped.
-// If returning true, sets the reading to the measured moist reading.
-bool tryUpdateMoistReading(*int reading) {
-  if (readingMoist) { return false; }
-
-  reading = moistResult;
-  return true;
-}
-*/
