@@ -202,7 +202,7 @@ void readEvents()
 
 void checkIfCloseWater()
 {
-  if(millis() - lastOpen > openDelay)
+  if(isWatering && millis() - lastOpen > openDelay)
   {
     isWatering = false;
     servo.write(waterClosed);
