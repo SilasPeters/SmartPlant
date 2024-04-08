@@ -48,13 +48,13 @@ void AMUX::loop() {
 
 void AMUX::startReadingMoist() {
   lastMoistReadingTime = millis();
-  digitalWrite(PIN_AMUX_SEL, LOW); // LOW or HIGH is inverted on NodeMCU
+  digitalWrite(PIN_AMUX_SEL, HIGH);
   readingMoist = true;
 }
 
 void AMUX::stopReadingMoist() {
   lastMoistReading = analogRead(PIN_AMUX_ANALOG_READ);
-  digitalWrite(PIN_AMUX_SEL, HIGH); // LOW or HIGH is inverted on NodeMCU
+  digitalWrite(PIN_AMUX_SEL, LOW);
   readingMoist = false;
 }
 
