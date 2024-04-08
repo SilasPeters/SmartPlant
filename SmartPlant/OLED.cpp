@@ -10,6 +10,7 @@
 #define OLED_RESET -1
 #define WIRE Wire
 
+//Bitmap of froge
 const unsigned char froge_bitmap_frogesmall [] PROGMEM = {
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x1f, 0xff, 0xff, 
 	0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xfe, 0x00, 0x00, 0x00, 0x00, 0x00, 
@@ -33,6 +34,7 @@ const unsigned char froge_bitmap_frogesmall [] PROGMEM = {
 	0xfc, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 };
 
+//Seetup
 void OLED::setup() {
   OLED::display = Adafruit_SSD1306(128, 32, &WIRE);
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
@@ -41,25 +43,30 @@ void OLED::setup() {
   // Clear the buffer.
   display.clearDisplay();
 
+  // Set textsize to one row (8px) and set text color
   display.setTextSize(1);
   display.setTextColor(SSD1306_WHITE);
 }
 
+// Access point for clearing OLED
 void OLED::clear()
 {
   display.clearDisplay();
 }
 
+//Access point for (re)setting cursor position (default 0,0)
 void OLED::cursor(int x, int y)
 {
   display.setCursor(x, y);
 }
 
+// Print all staged pixels to the screen
 void OLED::finish()
 {
   display.display();
 }
 
+// Froge
 void OLED::drawFroge()
 {
   clear();
@@ -68,12 +75,14 @@ void OLED::drawFroge()
   finish();
 }
 
+// Add text to staged pixels
 void OLED::drawText(int line, String text)
 {
   cursor(0, line);
   display.print(text);
 }
 
+// Draw the entire sensor screen (all sensor values)
 void OLED::sensorScreen(float temp, int light, int moist, float pressure)
 {
   clear();
@@ -109,6 +118,7 @@ void OLED::sensorScreen(float temp, int light, int moist, float pressure)
   finish();
 }
 
+// Draw the entire LastWater Screen (displays time since last water and moisture level)
 void OLED::lastWaterScreen(int minutesAgo, int moist)
 {
   clear();
@@ -128,6 +138,7 @@ void OLED::lastWaterScreen(int minutesAgo, int moist)
   finish();
 }
 
+// Display watering screen (displays during watering, shows indicative text and moisture level)
 void OLED::wateringScreen(int moist)
 {
   clear();

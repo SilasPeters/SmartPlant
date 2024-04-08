@@ -1,0 +1,1239 @@
+[
+    {
+        "id": "bcfd79db1475d3f0",
+        "type": "tab",
+        "label": "Time conversion",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "66308f11a361ecf8",
+        "type": "tab",
+        "label": "Gesture communication",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "59ebdec9fb894026",
+        "type": "tab",
+        "label": "Dashboard",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "9f32a12d9a94cf0f",
+        "type": "mqtt-broker",
+        "name": "IT shit",
+        "broker": "science-vs352.science.uu.nl",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "4e14f9eb03f3e5cc",
+        "type": "mqtt-broker",
+        "name": "UU",
+        "broker": "science-vs352.science.uu.nl",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "720ed6285f134738",
+        "type": "serial-port",
+        "name": "Stickuino",
+        "serialport": "INSERT",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "9d934b134d1d4279",
+        "type": "serial-port",
+        "name": "Stickuino gestures",
+        "serialport": "COM5",
+        "serialbaud": "9600",
+        "databits": "8",
+        "parity": "none",
+        "stopbits": "1",
+        "waitfor": "",
+        "dtr": "none",
+        "rts": "none",
+        "cts": "none",
+        "dsr": "none",
+        "newline": "\\n",
+        "bin": "false",
+        "out": "char",
+        "addchar": "",
+        "responsetimeout": "10000"
+    },
+    {
+        "id": "32e4077def401626",
+        "type": "ui_tab",
+        "name": "Home Dashboard",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "774059b81c082401",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "3be1eaa5a3113980",
+        "type": "ui_group",
+        "name": "Data",
+        "tab": "32e4077def401626",
+        "order": 1,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "8987b193b642c18e",
+        "type": "ui_group",
+        "name": "Control",
+        "tab": "32e4077def401626",
+        "order": 2,
+        "disp": true,
+        "width": "6",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "a48b35ea6a6935c3",
+        "type": "ui_group",
+        "name": "Moisture",
+        "tab": "32e4077def401626",
+        "order": 3,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "6cc05835089fb6d8",
+        "type": "ui_group",
+        "name": "Light",
+        "tab": "32e4077def401626",
+        "order": 4,
+        "disp": true,
+        "width": "6",
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "ce3421f189f6e609",
+        "type": "mqtt in",
+        "z": "bcfd79db1475d3f0",
+        "name": "Time since last water input",
+        "topic": "infob3it/student085/garden/state/ts_last_watering",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 250,
+        "y": 300,
+        "wires": [
+            [
+                "d9f9a68c0be00b3a"
+            ]
+        ]
+    },
+    {
+        "id": "d9f9a68c0be00b3a",
+        "type": "function",
+        "z": "bcfd79db1475d3f0",
+        "name": "Convert date to time",
+        "func": "var minsAgo = parseInt(msg.payload);\nvar currentDate = new Date();\ncurrentDate.setMinutes(currentDate.getMinutes() - minsAgo);\nvar formattedDate = currentDate.toLocaleString();\nreturn { payload: formattedDate };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 300,
+        "wires": [
+            [
+                "b96adfd2734e48b7"
+            ]
+        ]
+    },
+    {
+        "id": "b96adfd2734e48b7",
+        "type": "mqtt out",
+        "z": "bcfd79db1475d3f0",
+        "name": "publish time",
+        "topic": "infob3it/student085/garden/state/timeof_last_watering",
+        "qos": "",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f32a12d9a94cf0f",
+        "x": 710,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c90ec24f832601d9",
+        "type": "serial in",
+        "z": "66308f11a361ecf8",
+        "name": "Stickuino serial output",
+        "serial": "9d934b134d1d4279",
+        "x": 180,
+        "y": 400,
+        "wires": [
+            [
+                "4d2aebfbc1985996",
+                "1af820aa52a5ab6c"
+            ]
+        ]
+    },
+    {
+        "id": "4d2aebfbc1985996",
+        "type": "debug",
+        "z": "66308f11a361ecf8",
+        "name": "Print serial input",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 400,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "7ee2be3a3eda854d",
+        "type": "switch",
+        "z": "66308f11a361ecf8",
+        "name": "Parse gesture",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "doWaterGesture",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "doSensorGesture",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 580,
+        "y": 400,
+        "wires": [
+            [
+                "c2176fd0fc07ff04",
+                "399fe1251b386b67"
+            ],
+            [
+                "5669e1810ce6b96a",
+                "702342702205da52"
+            ]
+        ]
+    },
+    {
+        "id": "c2176fd0fc07ff04",
+        "type": "debug",
+        "z": "66308f11a361ecf8",
+        "name": "Water",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Water gesture!\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "5669e1810ce6b96a",
+        "type": "debug",
+        "z": "66308f11a361ecf8",
+        "name": "Sensor",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "\"Sensor gesture!\"",
+        "targetType": "jsonata",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "8df90a8c816773f0",
+        "type": "mqtt out",
+        "z": "66308f11a361ecf8",
+        "name": "Read sensors",
+        "topic": "infob3it/student085/garden/do/sense",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f32a12d9a94cf0f",
+        "x": 1020,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "50fc8ec42846292e",
+        "type": "mqtt out",
+        "z": "66308f11a361ecf8",
+        "name": "Water plant",
+        "topic": "infob3it/student085/garden/do/water",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f32a12d9a94cf0f",
+        "x": 1010,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "1af820aa52a5ab6c",
+        "type": "change",
+        "z": "66308f11a361ecf8",
+        "name": "Trim newline",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "$trim(msg.payload)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 390,
+        "y": 400,
+        "wires": [
+            [
+                "7ee2be3a3eda854d"
+            ]
+        ]
+    },
+    {
+        "id": "399fe1251b386b67",
+        "type": "change",
+        "z": "66308f11a361ecf8",
+        "name": "Empty payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "do",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 360,
+        "wires": [
+            [
+                "50fc8ec42846292e"
+            ]
+        ]
+    },
+    {
+        "id": "702342702205da52",
+        "type": "change",
+        "z": "66308f11a361ecf8",
+        "name": "Empty payload",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "do",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 440,
+        "wires": [
+            [
+                "8df90a8c816773f0"
+            ]
+        ]
+    },
+    {
+        "id": "14d30d538df14413",
+        "type": "ui_gauge",
+        "z": "59ebdec9fb894026",
+        "name": "Moisture Gauge",
+        "group": "a48b35ea6a6935c3",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Soil Moisture",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1024",
+        "colors": [
+            "#b30000",
+            "#e6e600",
+            "#43cb3a"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 460,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "1f334882f5a08200",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Moisture In",
+        "topic": "infob3it/student085/garden/sense/moist",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 140,
+        "y": 860,
+        "wires": [
+            [
+                "14d30d538df14413",
+                "50d4628fb811b016"
+            ]
+        ]
+    },
+    {
+        "id": "f40fb2c03972cc43",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Light In",
+        "topic": "infob3it/student085/garden/sense/light",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 1060,
+        "wires": [
+            [
+                "fc4b86740b2d87f1",
+                "5573176c787309ad"
+            ]
+        ]
+    },
+    {
+        "id": "fc4b86740b2d87f1",
+        "type": "ui_gauge",
+        "z": "59ebdec9fb894026",
+        "name": "Light Gauge",
+        "group": "6cc05835089fb6d8",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Light Intensity",
+        "label": "",
+        "format": "{{value}}",
+        "min": 0,
+        "max": "1024",
+        "colors": [
+            "#000000",
+            "#7d7d7d",
+            "#ffffff"
+        ],
+        "seg1": "",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 310,
+        "y": 1060,
+        "wires": []
+    },
+    {
+        "id": "70c45a7e1eb2e93a",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Temp In",
+        "topic": "infob3it/student085/garden/sense/temperature",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 130,
+        "y": 420,
+        "wires": [
+            [
+                "f455022e1f05fce5"
+            ]
+        ]
+    },
+    {
+        "id": "f455022e1f05fce5",
+        "type": "ui_text",
+        "z": "59ebdec9fb894026",
+        "group": "3be1eaa5a3113980",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Temperature Display",
+        "label": "Temperature:",
+        "format": "{{msg.payload}} *C",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 360,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "ad8ea865ef71da25",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Pressure In",
+        "topic": "infob3it/student085/garden/sense/pressure",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 150,
+        "y": 460,
+        "wires": [
+            [
+                "b6fd688ff53ea875"
+            ]
+        ]
+    },
+    {
+        "id": "b6fd688ff53ea875",
+        "type": "ui_text",
+        "z": "59ebdec9fb894026",
+        "group": "3be1eaa5a3113980",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "name": "Pressure Display",
+        "label": "Pressure",
+        "format": "{{msg.payload}} hPa",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 350,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "8ce58b6b82c714ae",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Time Since Last Water In",
+        "topic": "infob3it/student085/garden/state/ts_last_watering",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "f4f93cc3a1526d32"
+            ]
+        ]
+    },
+    {
+        "id": "9ac97288b6dcf376",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Time Of Last Water In",
+        "topic": "infob3it/student085/garden/state/timeof_last_watering",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 180,
+        "y": 360,
+        "wires": [
+            [
+                "c684df2c3e0c222b"
+            ]
+        ]
+    },
+    {
+        "id": "f4f93cc3a1526d32",
+        "type": "ui_text",
+        "z": "59ebdec9fb894026",
+        "group": "3be1eaa5a3113980",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "name": "Time Since Last Water Display",
+        "label": "Last Water:",
+        "format": "{{msg.payload}} minutes ago",
+        "layout": "col-center",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 470,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c684df2c3e0c222b",
+        "type": "ui_text",
+        "z": "59ebdec9fb894026",
+        "group": "3be1eaa5a3113980",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "name": "Time Of Last Water Display",
+        "label": "The last watering was ",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 460,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "8d4ed98cab21b79f",
+        "type": "ui_text",
+        "z": "59ebdec9fb894026",
+        "group": "3be1eaa5a3113980",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Status Display",
+        "label": "Status:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 560,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "43fcf4739ff9c150",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Online Status In",
+        "topic": "infob3it/student085/garden/state/online",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 180,
+        "wires": [
+            [
+                "7d4fb825973671b4"
+            ]
+        ]
+    },
+    {
+        "id": "7d4fb825973671b4",
+        "type": "function",
+        "z": "59ebdec9fb894026",
+        "name": "Convert to text",
+        "func": "var payload = msg.payload;\nvar output = \"\";\nif(payload)\n{\n    output = \"ONLINE\";\n}\nelse\n{\n    output = \"OFFLINE\";\n}\nreturn { payload: output };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 180,
+        "wires": [
+            [
+                "8d4ed98cab21b79f"
+            ]
+        ]
+    },
+    {
+        "id": "4c5720a3d4823a1b",
+        "type": "function",
+        "z": "59ebdec9fb894026",
+        "name": "Convert to text",
+        "func": "var payload = msg.payload;\nvar output = \"\";\nif(payload)\n{\n    output = \"MANUAL\";\n}\nelse\n{\n    output = \"AUTOMATIC\";\n}\nreturn { payload: output };",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 220,
+        "wires": [
+            [
+                "ceca6572b869b3cc"
+            ]
+        ]
+    },
+    {
+        "id": "cd049e144548eb45",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Manual Status In",
+        "topic": "infob3it/student085/garden/state/manual",
+        "qos": "1",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 160,
+        "y": 220,
+        "wires": [
+            [
+                "4c5720a3d4823a1b"
+            ]
+        ]
+    },
+    {
+        "id": "ceca6572b869b3cc",
+        "type": "ui_text",
+        "z": "59ebdec9fb894026",
+        "group": "3be1eaa5a3113980",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "name": "Mode Display",
+        "label": "Mode:",
+        "format": "{{msg.payload}}",
+        "layout": "row-left",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 560,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "bd2d22c1b591484b",
+        "type": "comment",
+        "z": "59ebdec9fb894026",
+        "name": " DATA DISPLAY",
+        "info": "",
+        "x": 160,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "332973dd3d4d936c",
+        "type": "comment",
+        "z": "59ebdec9fb894026",
+        "name": "CONTROL",
+        "info": "",
+        "x": 140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "2a0582e5c93856a6",
+        "type": "ui_button",
+        "z": "59ebdec9fb894026",
+        "name": "Water Plant",
+        "group": "8987b193b642c18e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Water",
+        "tooltip": "Waters the plant",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "str",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 150,
+        "y": 600,
+        "wires": [
+            [
+                "79fd258c2d392712"
+            ]
+        ]
+    },
+    {
+        "id": "d8ca2447fa6483e9",
+        "type": "mqtt out",
+        "z": "59ebdec9fb894026",
+        "name": "Read sensors",
+        "topic": "infob3it/student085/garden/do/sense",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f32a12d9a94cf0f",
+        "x": 360,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "79fd258c2d392712",
+        "type": "mqtt out",
+        "z": "59ebdec9fb894026",
+        "name": "Water plant",
+        "topic": "infob3it/student085/garden/do/water",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f32a12d9a94cf0f",
+        "x": 350,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "e0dc92adbccbe34f",
+        "type": "ui_button",
+        "z": "59ebdec9fb894026",
+        "name": "Read Sensors",
+        "group": "8987b193b642c18e",
+        "order": 0,
+        "width": 0,
+        "height": 0,
+        "passthru": false,
+        "label": "Sense",
+        "tooltip": "Requests all sensor values and updates them on the dashboard",
+        "color": "",
+        "bgcolor": "",
+        "className": "",
+        "icon": "",
+        "payload": "true",
+        "payloadType": "str",
+        "topic": "payload",
+        "topicType": "msg",
+        "x": 160,
+        "y": 660,
+        "wires": [
+            [
+                "d8ca2447fa6483e9"
+            ]
+        ]
+    },
+    {
+        "id": "ab24308b99c7542f",
+        "type": "ui_switch",
+        "z": "59ebdec9fb894026",
+        "name": "Manual Switch",
+        "label": "Toggle Manual",
+        "tooltip": "Toggles Manual mode",
+        "group": "8987b193b642c18e",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "payload",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 160,
+        "y": 720,
+        "wires": [
+            [
+                "b2827d0b80c3d177"
+            ]
+        ]
+    },
+    {
+        "id": "b2827d0b80c3d177",
+        "type": "mqtt out",
+        "z": "59ebdec9fb894026",
+        "name": "Toggle Manual",
+        "topic": "infob3it/student085/garden/state/manual",
+        "qos": "1",
+        "retain": "true",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f32a12d9a94cf0f",
+        "x": 360,
+        "y": 720,
+        "wires": []
+    },
+    {
+        "id": "31d1a641f85f0659",
+        "type": "comment",
+        "z": "59ebdec9fb894026",
+        "name": "MOISTURE",
+        "info": "",
+        "x": 150,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "50d4628fb811b016",
+        "type": "ui_chart",
+        "z": "59ebdec9fb894026",
+        "name": "Moisture Graph",
+        "group": "a48b35ea6a6935c3",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "label": "Moisture History",
+        "chartType": "line",
+        "legend": "true",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1024",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#00ffbf",
+            "#0033ff",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 460,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "bc4e86bd2bc94c21",
+        "type": "comment",
+        "z": "59ebdec9fb894026",
+        "name": "LIGHT",
+        "info": "",
+        "x": 130,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "bd6fbb82973728c4",
+        "type": "mqtt in",
+        "z": "59ebdec9fb894026",
+        "name": "Moisture Treshold shit uwu",
+        "topic": "infob3it/student085/garden/calibration/moist",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "9f32a12d9a94cf0f",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 190,
+        "y": 920,
+        "wires": [
+            [
+                "50d4628fb811b016"
+            ]
+        ]
+    },
+    {
+        "id": "5573176c787309ad",
+        "type": "ui_chart",
+        "z": "59ebdec9fb894026",
+        "name": "Light Graph",
+        "group": "6cc05835089fb6d8",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "label": "Light History",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "dd HH:mm",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "0",
+        "ymax": "1024",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "86400",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 310,
+        "y": 1100,
+        "wires": [
+            []
+        ]
+    }
+]

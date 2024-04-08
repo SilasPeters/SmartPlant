@@ -82,7 +82,6 @@ void setup()
   pinMode(LED_BUILTIN, OUTPUT);
   Wire.begin(PIN_WIRE_DATA_LINE, PIN_WIRE_CLOCK_LINE);
   Serial.begin(9600);
-  // while ( !Serial ) delay(100);   // wait for native usb
   oled.setup();
   oled.drawFroge();
   bmp.setup(); // MUST BE AFTER OLED
@@ -105,6 +104,7 @@ void loop() {
   updateEvents();
 }
 
+//polls the flashbutton including debouncing, and toggles automatic if so
 void readFlashButton()
 {
   if(millis() - lastPress >= debounceTime)
@@ -117,12 +117,14 @@ void readFlashButton()
   }
 }
 
+//sets the AUTOMATIC variable (updated from MQTT input)
 void setManual(bool manual)
 {
   AUTOMATIC = !manual;
   setAutomaticLed();
 }
 
+//flips the AUTOMATIC variable (from button, updates MQTT output)
 void toggleAutomatic()
 {
   AUTOMATIC = !AUTOMATIC;
@@ -130,6 +132,7 @@ void toggleAutomatic()
   setAutomaticLed();  
 }
 
+//Updates builtin led
 void setAutomaticLed()
 {
   if(AUTOMATIC)
@@ -142,6 +145,7 @@ void setAutomaticLed()
   }  
 }
 
+//Checks for all events that have to occur.
 void updateEvents()
 {
   checkIfCloseWater();
@@ -164,6 +168,7 @@ void updateEvents()
   }
 }
 
+// Checks for the execution of any events and executes them if needed
 void readEvents()
 {
   if(doWater)
@@ -177,7 +182,7 @@ void readEvents()
   if(doDetermine)
   {
     doDetermine = false;
-    if(skipChecks == 0)
+    if(skipChecks == 0) // Skip first two checks after a water
     {
       determineWater();
     }
@@ -189,10 +194,11 @@ void readEvents()
   if(doPublish)
   {
     doPublish = false;
-    publishValues();
+    publishValues(); // Updates MQTT values
   }
 }
 
+//Check if the watering should stop, and if so update the OLED back to its original cycle and close the watering.
 void checkIfCloseWater()
 {
   if(isWatering && millis() - lastOpen > openDelay)
@@ -203,6 +209,7 @@ void checkIfCloseWater()
   }
 }
 
+// Start the watering of the plant.
 void waterPlant()
 {
   isWatering = true;
@@ -212,6 +219,7 @@ void waterPlant()
   oled.wateringScreen(amux.getLastMoistReading());
 }
 
+// Determine if watering should occur
 void determineWater()
 {
   if(amux.getLastMoistReading() < thMoist)
@@ -221,6 +229,7 @@ void determineWater()
   }
 }
 
+// Publish values to MQTT
 void publishValues()
 {
   mqtt.publishMoist(amux.getLastMoistReading());
@@ -231,10 +240,11 @@ void publishValues()
 
   if(!isWatering)
   {
-    updateOLED(); // Watering screen
+    updateOLED(); // Update screen only if it's not watering
   }
 }
 
+// Update the ODED screen to cycle between various screens.
 void updateOLED()
 {
   OLEDScreen ++;
