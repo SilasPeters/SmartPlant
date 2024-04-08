@@ -13,5 +13,6 @@ class OLED
     void drawFroge();
     void drawText(int line, String text);
     void sensorScreen(float temp, int light, int moist, float pressure);
-    void lastWaterScreen(int minutesAgo);
+    void lastWaterScreen(int minutesAgo, int moist);
+    void wateringScreen(int moist);
 };

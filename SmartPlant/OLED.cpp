@@ -109,11 +109,40 @@ void OLED::sensorScreen(float temp, int light, int moist, float pressure)
   finish();
 }
 
-void OLED::lastWaterScreen(int minutesAgo)
+void OLED::lastWaterScreen(int minutesAgo, int moist)
 {
   clear();
   drawText(0, F("Last Water:"));
   drawText(8, String(minutesAgo) + "m ago");
+
+  //MOIST
+  float moistF = (float)moist / 1024;
+  int moistOn = (int)(moistF * 10);
+  String moistPrint = "Soil:  ";
+  for(int m = 0; m < 10; m++)
+  {
+    if(m < moistOn) { moistPrint += "#"; }
+    else { moistPrint += "-"; }
+  }
+  drawText(24, moistPrint);
+  finish();
+}
+
+void OLED::wateringScreen(int moist)
+{
+  clear();
+  drawText(0, F("Watering..."));
+
+  //MOIST
+  float moistF = (float)moist / 1024;
+  int moistOn = (int)(moistF * 10);
+  String moistPrint = "Soil:  ";
+  for(int m = 0; m < 10; m++)
+  {
+    if(m < moistOn) { moistPrint += "#"; }
+    else { moistPrint += "-"; }
+  }
+  drawText(16, moistPrint);
   finish();
 }
 

@@ -5,7 +5,7 @@
 class MQTT
 {
 	public:
-		MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), void (*calibrateMoistRef)(int));
+		MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), void (*calibrateMoistRef)(int), void (*setManualRef)(bool));
 		void loop();
     void publishMoist(int moist);
     void publishLight(int light);

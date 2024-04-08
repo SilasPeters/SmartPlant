@@ -9,6 +9,7 @@
 #include "AMUX.h"
 #include "Wifi.h"
 #include "MQTT.h"
+#include "GlobalStates.h"
 
 // PIN CONFIG --------------------------------------------
 const int PIN_WIRE_DATA_LINE = D1;  // IC2 Data line
@@ -18,14 +19,19 @@ const int PIN_AMUX_SEL = D5;
 const int PIN_AMUX_ANALOG_READ = A0;
 // -------------------------------------------------------
 
+
+// STATES ------------------------------------------------
+bool AUTOMATIC = true;
+// -------------------------------------------------------
+
 // BUTTON VARS -------------------------------------------
 unsigned long lastPress;
 const unsigned long debounceTime = 50;
 // -------------------------------------------------------
 
 // WATER GIVING VARS -------------------------------------
-const int waterOpen = 25;
-const int waterClosed = 72;
+const int waterOpen = 30;
+const int waterClosed = 0;
 bool isWatering = false;
 unsigned long lastOpen;
 const unsigned long openDelay = 10000;
@@ -33,9 +39,6 @@ int defaultSkipChecks = 2;
 int skipChecks = defaultSkipChecks;
 // -------------------------------------------------------
 
-// STATES ------------------------------------------------
-bool automatic = true;
-// -------------------------------------------------------
 
 // EVENT READERS -----------------------------------------
 bool doWater = false;
@@ -64,7 +67,7 @@ BMP bmp;
 AMUX amux;
 Wifi wifi;
 WiFiClient wifiClient;
-MQTT mqtt(wifiClient, &mqtt_waterPlant, &mqtt_publishValues, &mqtt_calibrateMoist);
+MQTT mqtt(wifiClient, &mqtt_waterPlant, &mqtt_publishValues, &mqtt_calibrateMoist, &setManual);
 
 void mqtt_waterPlant() {
   doWater = true;
@@ -94,6 +97,7 @@ void setup()
   servo.setup(PIN_SERVO);
   // Autoconnect to known AP, or become AP with specified credentials
   wifi.setup(AP_SSID, AP_PASSWORD); // Note, that the password must be at least 8 chars long
+  servo.write(waterOpen);
 }
 
 bool ledStatus = false;
@@ -121,11 +125,16 @@ void readFlashButton()
   }
 }
 
+void setManual(bool manual)
+{
+  AUTOMATIC = !manual;
+}
+
 void toggleAutomatic()
 {
-  automatic = !automatic;
-  mqtt.publishManual(!automatic);
-  if(automatic)
+  AUTOMATIC = !AUTOMATIC;
+  mqtt.publishManual(!AUTOMATIC);
+  if(AUTOMATIC)
   {
     digitalWrite(LED_BUILTIN, LOW);
     Serial.println("led ON");
@@ -147,7 +156,7 @@ void updateEvents()
     doPublish = true;
     lastPublish = mil;
   }
-  if(mil - lastDetermine >= determineInterval && automatic)
+  if(mil - lastDetermine >= determineInterval && AUTOMATIC)
   {
     doDetermine = true;
     lastDetermine = mil;
@@ -194,6 +203,7 @@ void checkIfCloseWater()
   {
     isWatering = false;
     servo.write(waterClosed);
+    updateOLED();
   }
 }
 
@@ -203,6 +213,7 @@ void waterPlant()
   lastOpen = millis();
   servo.write(waterOpen);
   skipChecks = defaultSkipChecks;
+  oled.wateringScreen(amux.getLastMoistReading());
 }
 
 void determineWater()
@@ -222,6 +233,14 @@ void publishValues()
   mqtt.publishTemperature(bmp.temperature());
   mqtt.publishTimeSinceLastWatering(lastWaterMinutesAgo);
 
+  if(!isWatering)
+  {
+    updateOLED(); // Watering screen
+  }
+}
+
+void updateOLED()
+{
   OLEDScreen ++;
   if(OLEDScreen == 3) { OLEDScreen = 0; }
 
@@ -231,7 +250,7 @@ void publishValues()
       oled.sensorScreen(bmp.temperature(), amux.getLastLdrReading(), amux.getLastMoistReading(), bmp.pressure());
       break;
     case 1:
-      oled.lastWaterScreen(lastWaterMinutesAgo);
+      oled.lastWaterScreen(lastWaterMinutesAgo, amux.getLastMoistReading());
       break;
     case 2:
       oled.drawFroge();

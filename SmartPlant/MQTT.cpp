@@ -14,14 +14,16 @@ PubSubClient client;
 void (*waterPlant)();
 void (*publishValues)();
 void (*calibrateMoist)(int);
+void (*setManual)(bool);
 
-MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), void (*calibrateMoistRef)(int)) : client(wifiClient) {
+MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValuesRef)(), void (*calibrateMoistRef)(int), void (*setManualRef)(bool)) : client(wifiClient) {
 	client.setServer(MQTT_SERVER, 1883);
 	client.setCallback(callback);
 
 	waterPlant = waterPlantRef;
   publishValues = publishValuesRef;
 	calibrateMoist = calibrateMoistRef;
+  setManual = setManualRef;
 }
 
 void MQTT::loop() {
@@ -62,6 +64,17 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
 	if (String(topic) == TOPIC_CALIBRATE_MOIST) {
 		calibrateMoist(int(payload));
 	}
+  if (String(topic) == TOPIC_MANUAL)
+  {
+    if(receivedPayload == "true")
+    {
+      setManual(false);
+    }
+    else
+    {
+      setManual(true);
+    }
+  }
 }
 
 void MQTT::reconnect() {  // TODO blocking
