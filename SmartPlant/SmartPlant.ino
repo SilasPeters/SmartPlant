@@ -97,7 +97,6 @@ void setup()
   servo.setup(PIN_SERVO);
   // Autoconnect to known AP, or become AP with specified credentials
   wifi.setup(AP_SSID, AP_PASSWORD); // Note, that the password must be at least 8 chars long
-  servo.write(waterOpen);
 }
 
 bool ledStatus = false;
@@ -128,21 +127,25 @@ void readFlashButton()
 void setManual(bool manual)
 {
   AUTOMATIC = !manual;
+  setAutomaticLed();
 }
 
 void toggleAutomatic()
 {
   AUTOMATIC = !AUTOMATIC;
   mqtt.publishManual(!AUTOMATIC);
+  setAutomaticLed();
+}
+
+void setAutomaticLed()
+{
   if(AUTOMATIC)
   {
     digitalWrite(LED_BUILTIN, LOW);
-    Serial.println("led ON");
   }
   else 
   {
     digitalWrite(LED_BUILTIN, HIGH);
-    Serial.println("led OFF");
   }  
 }
 

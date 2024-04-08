@@ -38,7 +38,8 @@ void MQTT::loop() {
 void MQTT::announce(){
   client.subscribe(TOPIC_WATER);
   client.subscribe(TOPIC_SENSE);
-  client.subscribe(TOPIC_CALIBRATE_MOIST);  
+  client.subscribe(TOPIC_CALIBRATE_MOIST);
+  client.subscribe(TOPIC_MANUAL);  
   client.publish(TOPIC_ONLINE, "true", true);
   publishManual(false);
 }
@@ -66,7 +67,7 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
 	}
   if (String(topic) == TOPIC_MANUAL)
   {
-    if(receivedPayload == "true")
+    if(receivedPayload == "false")
     {
       setManual(false);
     }
