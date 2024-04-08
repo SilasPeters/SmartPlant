@@ -17,6 +17,6 @@ class MQTT
 	private:
     PubSubClient client;
     static void callback(char* topic, byte* payload, unsigned int length);
-    void reconnect();
+    bool ensureConnection();
     void announce();
 };
