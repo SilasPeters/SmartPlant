@@ -104,7 +104,7 @@ void OLED::sensorScreen(float temp, int light, int moist, float pressure)
   drawText(16, moistPrint);
 
   //Pressure:
-  drawText(24, "Press: " + String(pressure) + "Pa");
+  drawText(24, "Press: " + String(pressure) + "hPa");
 
   finish();
 }
