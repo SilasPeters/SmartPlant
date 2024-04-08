@@ -16,7 +16,7 @@ void AMUX::setup(int pin_sel, int pin_read, unsigned long moistReadingIntervalPa
   // Ensure that both values have been read before logic of other modules start
   readLdr();
   startReadingMoist();
-  delay(moistReadingDuration); // TODO blocking
+  delay(moistReadingDuration); // This is blocking, but its on boot only
   stopReadingMoist();
 }
 
