@@ -1,3 +1,2 @@
 Noteer alle libraries en users
-neem in-code todos mee
 node-red plugin:  node-red-node-serialport
