@@ -20,6 +20,7 @@ void AMUX::setup(int pin_sel, int pin_read, unsigned long moistReadingIntervalPa
   stopReadingMoist();
 }
 
+// Expose variables through methods for reliability
 int AMUX::getLastMoistReading() { return lastMoistReading; }
 int AMUX::getLastLdrReading() { return lastLdrReading; }
 
@@ -28,7 +29,7 @@ void AMUX::loop() {
 
   // Check if it is time to read the soil's moist
   if (timeSinceLastMoistReading >= moistReadingInterval) {
-    startReadingMoist();
+    startReadingMoist(); // It is!
   }
 
   switch(readingMoist) { // Either measure the soil or the light, not both
@@ -46,18 +47,21 @@ void AMUX::loop() {
   }
 }
 
+// Switch the AMUX SEL pin on, and remember to wait
 void AMUX::startReadingMoist() {
   lastMoistReadingTime = millis();
   digitalWrite(PIN_AMUX_SEL, HIGH);
   readingMoist = true;
 }
 
+// Switch the AMUX SEL pin pack off, and stop waiting
 void AMUX::stopReadingMoist() {
   lastMoistReading = analogRead(PIN_AMUX_ANALOG_READ);
   digitalWrite(PIN_AMUX_SEL, LOW);
   readingMoist = false;
 }
 
+// Plain and simple
 void AMUX::readLdr() {
   lastLdrReading = analogRead(PIN_AMUX_ANALOG_READ);
 }

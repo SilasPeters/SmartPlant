@@ -69,17 +69,10 @@ Wifi wifi;
 WiFiClient wifiClient;
 MQTT mqtt(wifiClient, &mqtt_waterPlant, &mqtt_publishValues, &mqtt_calibrateMoist, &setManual);
 
-void mqtt_waterPlant() {
-  doWater = true;
-}
-
-void mqtt_publishValues() {
-  doPublish = true;
-}
-
-void mqtt_calibrateMoist(int payload) {
-  thMoist = payload;
-}
+// Methods passed down to mqtt
+void mqtt_waterPlant()                { doWater = true; }
+void mqtt_publishValues()             { doPublish = true; }
+void mqtt_calibrateMoist(int payload) { thMoist = payload; }
 
 void setup()
 {

@@ -14,6 +14,7 @@ unsigned long reconnectInterval = 5000;
 
 PubSubClient client;
 
+// Store what to do on certain events
 void (*waterPlant)();
 void (*publishValues)();
 void (*calibrateMoist)(int);
@@ -23,12 +24,14 @@ MQTT::MQTT(WiFiClient& wifiClient, void (*waterPlantRef)(), void (*publishValues
 	client.setServer(MQTT_SERVER, 1883);
 	client.setCallback(callback);
 
+	// Store what to do on certain events
 	waterPlant = waterPlantRef;
   publishValues = publishValuesRef;
 	calibrateMoist = calibrateMoistRef;
   setManual = setManualRef;
 }
 
+// Every frame, check if connection is still there
 void MQTT::loop() {
 	if (!ensureConnection()) { return; }
 	client.loop();
@@ -36,6 +39,7 @@ void MQTT::loop() {
 }
 
 
+// Non-blockingly (as far as we could), reconnect to MQTT broker if disconnected
 bool MQTT::ensureConnection() {
 	if (client.connected()) { return true; } // Connection is ensured
 
@@ -63,6 +67,7 @@ bool MQTT::ensureConnection() {
 	return false;
 }
 
+// Debug print and process incoming messages
 void MQTT::callback(char* topic, byte* payload, unsigned int length) {
 	Serial.print("Message arrived [");
 	Serial.print(topic);
@@ -75,30 +80,15 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
 
 	Serial.println(receivedPayload);
 
-  if (String(topic) == TOPIC_WATER) {
-		waterPlant();
-  }
-  if (String(topic) == TOPIC_SENSE) {
-    publishValues();
-  }
-	if (String(topic) == TOPIC_CALIBRATE_MOIST) {
-		calibrateMoist(int(payload));
-	}
-  if (String(topic) == TOPIC_MANUAL)
-  {
-    if(receivedPayload == "false")
-    {
-      setManual(false);
-    }
-    else
-    {
-      setManual(true);
-    }
-  }
+  if (String(topic) == TOPIC_WATER)           { waterPlant(); }
+  if (String(topic) == TOPIC_SENSE)           { publishValues(); }
+	if (String(topic) == TOPIC_CALIBRATE_MOIST) { calibrateMoist(int(payload)); }
+  if (String(topic) == TOPIC_MANUAL)          { setManual(receivedPayload == "false" ? false : true); }
 }
 
 
 // PUBLISH METHODS -------------------------------------------
+// Other classes call these methods to publish values
 void MQTT::publishMoist(int moist) {
   client.publish(TOPIC_MOIST, String(moist).c_str());
 }
@@ -121,7 +111,7 @@ void MQTT::publishTimeSinceLastWatering(int minutes) {
 
 
 void MQTT::publishManual(bool manual) {
-  client.publish(TOPIC_MANUAL, manual ? "true" : "false", true);
+  client.publish(TOPIC_MANUAL, manual ? "true" : "false", true); // Persistent
 }
 // -----------------------------------------------------------
 
