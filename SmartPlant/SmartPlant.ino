@@ -134,7 +134,7 @@ void toggleAutomatic()
 {
   AUTOMATIC = !AUTOMATIC;
   mqtt.publishManual(!AUTOMATIC);
-  setAutomaticLed();
+  setAutomaticLed();  
 }
 
 void setAutomaticLed()

@@ -1,7 +1,7 @@
 // Both packages from: https://github.com/jrowberg/i2cdevlib
 // This code is also slightly based on the MPU6050 example in said repo
-#include "I2Cdev.h"
-#include "MPU6050.h"
+#include <I2Cdev.h>
+#include <MPU6050.h>
 
 MPU6050 accelgyro;
 
@@ -9,7 +9,7 @@ int16_t ax, ay, az;
 int16_t gx, gy, gz;
 
 
-//#define OUTPUT_READABLE_ACCELGYRO
+#define OUTPUT_READABLE_ACCELGYRO
 //#define OUTPUT_BINARY_ACCELGYRO
 //#define OUTPUT_PLOTTABLE_ACCELGYRO
 
@@ -54,11 +54,11 @@ void setup() {
 }
 
 // For water gesture  
-int minZ = -10000;
-int maxZ = -8000;
+int minZ = -12000;
+int maxZ = -10000;
 // For reading sensors
-int minY = 10000;
-int maxY = 8000;
+int minY = 2000;
+int maxY = 0;
 
 bool triggered;
 
