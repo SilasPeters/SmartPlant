@@ -7,7 +7,7 @@
 
 WiFiManager wifiManager;
 
-void Wifi::setup(String ap_ssid, String ap_password) { // TODO make this static?
+void Wifi::setup(String ap_ssid, String ap_password) {
   wifiManager.autoConnect(ap_ssid.c_str(), ap_password.c_str());
 }
 

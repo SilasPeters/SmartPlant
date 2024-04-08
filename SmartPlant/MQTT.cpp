@@ -100,7 +100,7 @@ void MQTT::callback(char* topic, byte* payload, unsigned int length) {
 
 // PUBLISH METHODS -------------------------------------------
 void MQTT::publishMoist(int moist) {
-  client.publish(TOPIC_MOIST, String(moist).c_str()); // TODO what must be persistent?
+  client.publish(TOPIC_MOIST, String(moist).c_str());
 }
 
 void MQTT::publishLight(int light) {
