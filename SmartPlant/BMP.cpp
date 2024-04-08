@@ -42,7 +42,7 @@ float BMP::temperature() {
 }
 
 float BMP::pressure() {
-  return bmp.readPressure();
+  return bmp.readPressure() / 100;
 }
 
 float BMP::altitude() {
