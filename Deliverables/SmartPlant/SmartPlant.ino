@@ -7,9 +7,8 @@
 #include "OLED.h"
 #include "BMP.h"
 #include "AMUX.h"
-#include "Wifi.h"
+#include "Wifi.h" 
 #include "MQTT.h"
-#include "GlobalStates.h"
 
 // PIN CONFIG --------------------------------------------
 const int PIN_WIRE_DATA_LINE = D1;  // IC2 Data line
